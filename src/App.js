@@ -1,32 +1,18 @@
 import './App.css';
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import Profile  from "./components/profile";
 import Social from "./components/social";
 import Review from "./components/review";
+import { SignupFormProvider } from './components/context';
+import StepLinks from './components/stepLinks';
 
 export default function App() {
   return (
+      <SignupFormProvider>
       <Router>
         <div className="container">
-          <nav className="navigationLinks">
-            <ul>
-              <li>
-                <Link to="/">Profile</Link>
-              </li>
-              <li>
-                <Link to="/social">Social</Link>
-              </li>
-              <li>
-                <Link to="/review">Review</Link>
-              </li>
-            </ul>
-          </nav>
+          <StepLinks />
           <Switch>
             <Route path="/social">
               <Social />
@@ -34,12 +20,13 @@ export default function App() {
             <Route path="/review">
               <Review />
             </Route>
-            <Route path="/">
+            <Route path="/home">
               <Profile />
             </Route>
           </Switch>
         </div>
       </Router>
+        </SignupFormProvider>
   );
 }
 
